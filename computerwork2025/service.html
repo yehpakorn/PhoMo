@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhoMo - Tell us about your vision</title>
+    <link rel="stylesheet" href="css/service.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">PhoMo</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="service.html" class="nav-link active">Service</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact us</a></li>
+                </ul>
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+            <div class="nav-icon"><a href="https://www.nssc.ac.th/main/"><img src="img/nssc_logo.png" width="60" height="60" onerror="this.style.display='none'"></a></div>
+        </div>
+    </header>
+
+    <!-- Form Page -->
+    <div class="form-page" id="formPage">
+        <main class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Tell us about your vision</h1>
+                    <p class="page-subtitle">กรอกข้อมูลด้านล่าง เพื่อช่วยให้เราสร้างสรรค์สิ่งประดิษฐ์ที่สมบูรณ์แบบสำหรับคุณ</p>
+                </div>
+
+                <form class="vision-form" id="visionForm">
+                    <div class="form-group">
+                        <label for="scope" class="form-label">Your scope</label>
+                        <input 
+                            type="text" 
+                            id="scope" 
+                            name="scope" 
+                            class="form-input" 
+                            placeholder="กรุณาป้อนขอบเขตของคุณ... (เช่น 'เทคโนโลยีที่ช่วยแก้ปัญหาในชีวิตประจำวัน')"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Purpose</label>
+                        <div class="purpose-options">
+                            <div class="purpose-option">
+                                <input type="radio" id="business" name="purpose" value="business" class="purpose-radio" required>
+                                <label for="business" class="purpose-label">
+                                    <div class="purpose-icon">🏢</div>
+                                    <div class="purpose-text">
+                                        <div class="purpose-title">Business</div>
+                                        <div class="purpose-desc">(ธุรกิจ)</div>
+                                    </div>
+                                    <div class="radio-indicator"></div>
+                                </label>
+                            </div>
+                            
+                            <div class="purpose-option">
+                                <input type="radio" id="personal" name="purpose" value="personal" class="purpose-radio" required>
+                                <label for="personal" class="purpose-label">
+                                    <div class="purpose-icon">👤</div>
+                                    <div class="purpose-text">
+                                        <div class="purpose-title">Personal</div>
+                                        <div class="purpose-desc">(ส่วนบุคคล)</div>
+                                    </div>
+                                    <div class="radio-indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="additional" class="form-label">Additional Requirements</label>
+                        <textarea 
+                            id="additional" 
+                            name="additional" 
+                            class="form-input form-textarea" 
+                            placeholder="ใส่รายละเอียดเพิ่มเติมเกี่ยวกับความต้องการของคุณ..."
+                        ></textarea>
+                    </div>
+
+                    <button type="submit" class="continue-button" id="continueBtn">
+                        <span id="buttonText">Continue to design</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">ขั้นตอนง่าย ๆ ในการสร้างแนวคิดเชิงมืออาชีพของคุณ</p>
+                
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Share Your scope</h3>
+                        <p class="step-description">กรุณาให้ขอบเขตของคุณเพื่อสร้าง<br>ไอเดีย 5 แนวทาง</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">AI Create match ideas</h3>
+                        <p class="step-description">สร้างไอเดียที่สอดคล้องกับขอบเขต</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Review & Explain</h3>
+                        <p class="step-description">ตรวจสอบและสร้างสรรค์ไอเดียใหม่ <br>พร้อมอธิบายแนวคิด</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Results Page -->
+    <div class="results-page" id="resultsPage">
+        <main class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="page-title">Current idea set</h1>
+                    <p class="page-subtitle">เลือกไอเดียที่เชื่อมโยงกับความต้องการของคุณ</p>
+                </div>
+
+                <div class="ideas-grid" id="ideasGrid">
+                    <!-- Ideas will be populated here -->
+                </div>
+
+                <div class="action-buttons">
+                    <button class="reset-button" id="resetButton" onclick="resetIdeas()">
+                        <span>🔄</span>
+                        <span id="resetText">Generate new set</span>
+                    </button>
+                    
+                    <button class="select-button" id="selectButton" onclick="selectIdea()" disabled>
+                        <span id="selectText">Select this idea</span>
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- How It Works Section for Results -->
+        <section class="how-it-works">
+            <div class="section-container">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">ขั้นตอนง่าย ๆ เพื่อสร้างไอเดียเชิงมืออาชีพของคุณ</p>
+                
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Browse Idea</h3>
+                        <p class="step-description">ทบทวนชุดไอเดียโครงการทั้งห้าแบบที่คัดสรรมา <br>พร้อมคำอธิบายแนวคิดและประมาณเวลา</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Select or Generate</h3>
+                        <p class="step-description">เลือกไอเดียที่คุณสนใจ หรือคลิกปุ่มสร้างเพื่อรับชุดตัวเลือกใหม่</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Start building</h3>
+                        <p class="step-description">รับข้อกำหนดโครงการอย่างละเอียดและเริ่มพัฒนาไอเดียที่คุณเลือกด้วยความมั่นใจ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- NEW: Idea Details Page -->
+    <div class="details-page" id="detailsPage">
+        <main class="main-content">
+            <div class="container">
+                <!-- Back Button -->
+                <button class="back-button" onclick="backToResults()">
+                    <span>←</span>
+                    <span>Back to ideas</span>
+                </button>
+
+                <!-- Innovation Header -->
+                <div class="details-header">
+                    <h1 class="innovation-title">
+                        <div class="innovation-icon">💡</div>
+                        <span id="innovationTitle">Idea Innovation</span>
+                    </h1>
+                    <div class="innovation-explanation" id="innovationExplanation">
+                        explanation of Idea Innovation ...(given from AI)
+                    </div>
+                </div>
+
+                <!-- Key Features Section -->
+                <div class="features-section">
+                    <h2 class="section-title">Key features</h2>
+                    <p class="section-subtitle">ฟังก์ชันหลักของนวัตกรรม</p>
+                    
+                    <div class="features-grid" id="featuresGrid">
+                        <!-- Features will be populated here -->
+                    </div>
+                </div>
+
+                <!-- How to Make Section -->
+                <div class="how-to-section">
+                    <h2 class="section-title">How to make</h2>
+                    <p class="section-subtitle">อธิบายเทคโนโลยี...</p>
+                    
+                    <div class="steps-list" id="stepsList">
+                        <!-- Steps will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Development Method Section -->
+                <div class="development-section">
+                    <h2 class="section-title">Development method</h2>
+                    <p class="section-subtitle">แนวทางเชิงมืออาชีพในการทำให้ไอเดียของคุณเป็นจริง</p>
+                    
+                    <div class="development-grid">
+                        <div class="dev-phase">
+                            <div class="dev-icon">💡</div>
+                            <h3 class="dev-title">Research & Ideation</h3>
+                            <p class="dev-description" id="researchDesc">short explanation of this steps...</p>
+                        </div>
+                        
+                        <div class="dev-phase">
+                            <div class="dev-icon">⚙️</div>
+                            <h3 class="dev-title">Prototype Development</h3>
+                            <p class="dev-description" id="prototypeDesc">short explanation of this steps...</p>
+                        </div>
+                        
+                        <div class="dev-phase">
+                            <div class="dev-icon">🧪</div>
+                            <h3 class="dev-title">Testing & Validation</h3>
+                            <p class="dev-description" id="testingDesc">short explanation of this steps...</p>
+                        </div>
+                        
+                        <div class="dev-phase">
+                            <div class="dev-icon">🚀</div>
+                            <h3 class="dev-title">Launch & Scale</h3>
+                            <p class="dev-description" id="launchDesc">short explanation of this steps...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-brand">PhoMo</div>
+                    <p class="footer-tagline">
+                        Professional ideas create simple with<br>
+                        AI-powered tools.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#templates">Templates</a></li>
+                        <li><a href="#design-tools">Design Tools</a></li>
+                        <li><a href="#feature">Feature</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#terms">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 PhoMo. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="/js/all.js"></script>
+</body>
+</html>
