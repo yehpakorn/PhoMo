@@ -1,0 +1,284 @@
+{
+  "name": "computer",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "/webhook/idea-request",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a4eb3721-162f-43cd-9453-a2f40a34fe4a",
+      "name": "Webhook",
+      "webhookId": "31d251ec-b86f-47ed-84a6-d3afc56bb9c2"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Expand the selected idea: '{{ $json.body.selectedIdea }}' and '{{ $json.body.selectedDetail }}' into a very detailed plan in Thai.\n\n\n\nRespond only in valid JSON with this structure:\n\n\n\n{\n  \"idea\":\"the idea name\"\n  \"key_features\": [\n\n    \"List the main key features of this idea to three key features in Thai.Each had {title:keyfeature,explanation:explainthekeyfeature}\"\n\n  ],\n\n  \"how_to_make\": [\n\n    \"Step 1 in Thai (based on the selected idea){title:step,explanation:explainstep}\",\n\n    \"Step 2 in Thai (based on the selected idea) {title:step,explanation:explainstep}\",\n\n    \"Step 3 in Thai (based on the selected idea) {title:step,explanation:explainstep}\",\n\n     \"Step 4 in Thai (based on the selected idea) {title:step,explanation:explainstep}\"\n\n  ],\n\n  \"explanation\": \"A explanation in Thai of the concept, covering overview, key steps, tools, suggested resources, estimated time, and a short presentation outline. less than 20 sentence.\",\n\n  \"development_method\":{\n\n      \"research_ideation\": \"Explain in Thai how to research and brainstorm ideas for the selected concept in short\",\n\n      \"prototype_development\": \"Explain in Thai how to build an initial prototype of the selected idea in short\",\n\n      \"testing_validation\": \"Explain in Thai how to test and validate the selected idea in short\",\n\n      \"launch_scale\": \"Explain in Thai how to launch and expand the selected idea in short\"\n\n      }\n\n}\n\n\n\nRules:\n\n- All text must be in Thai.\n\n- Output must be valid JSON (no extra commentary or formatting).\n\n- \"HowToMake\" must always contain exactly 3 steps."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        368,
+        96
+      ],
+      "id": "96682c02-7926-4df6-8df1-bb58b97d3642",
+      "name": "explian the idea",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VWAMWc4ykQPn1EZX",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=From the following user inputs, create 5 unique idea titles in Thai. The output should be a JSON array containing each title and a brief explanation.\n\nInput Variables:\n\nscope: {{ $json.body.scope }} (The main topic or area for the ideas.)\n\npurpose: {{ $json.body.purpose }} (The intended use of the ideas, e.g., personal, business, educational.)\n\naddition: {{ $json.body.addition }} (Any extra details or constraints to consider for the ideas.)\n\nOutput Structure:\n\nGenerate a JSON array of 5 objects. Each object should have three keys:\n\ntitle: (The idea title in Thai.)\n\nexplanation: (A short explanation of the idea in Thai, no more than one sentence.)\n\ndevelopment time : (time that use to development the ideas)"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        368,
+        -128
+      ],
+      "id": "ea9934c5-4b8e-4777-9005-3f43118f0496",
+      "name": "create 5 idea",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "VWAMWc4ykQPn1EZX",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"status\":\"ok\",\n  \"action\":\"choose\",\n  \"ideas\":  {{ $json.content.parts[0].text }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        -128
+      ],
+      "id": "95fc7d90-4883-4710-825c-0b9ec241b648",
+      "name": "put to json"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.action }}",
+                    "rightValue": "choose",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "af1ed364-0a01-4925-930e-b1b1c336740c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "choose"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7dec3b56-6857-4398-92ac-d8805054dacb",
+                    "leftValue": "={{ $json.body.action }}",
+                    "rightValue": "explain",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "explain"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "5986d333-bcb1-44a5-8670-7c0eb871fe66",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        960,
+        0
+      ],
+      "id": "bc6c7994-a67c-4b09-b148-69940b1c307d",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"status\":\"ok\",\n  \"action\":\"explain\",\n  \"ideas\":  {{ $json.content.parts[0].text }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        80
+      ],
+      "id": "722b4487-d23b-42b4-8a97-0a8be520f8c2",
+      "name": "put to json1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "explian the idea": {
+      "main": [
+        [
+          {
+            "node": "put to json1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create 5 idea": {
+      "main": [
+        [
+          {
+            "node": "put to json",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "put to json": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "create 5 idea",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "explian the idea",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "put to json1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "dddbfd93-1cf8-4c3d-93c6-60adfaef92fb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33d3118021c86740b1a15c617d0d9d55d063df19d7374e00a1b8953c3734f20d"
+  },
+  "id": "xxPYwSPFfApG9BCv",
+  "tags": []
+}
