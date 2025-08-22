@@ -1,5 +1,5 @@
 //API SetUp
-const url = `your_webhook_here`; // Replace with your actual webhook
+const url = `https://phomo-n8n-docker.onrender.com/webhook/webhook/idea-request`; // Replace with your actual webhook
 
 // Global variables
 let currentIdeas = [];
