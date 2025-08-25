@@ -1,5 +1,5 @@
 {
-  "name": "computer",
+  "name": "PhoMo_context-N8N",
   "nodes": [
     {
       "parameters": {
@@ -62,7 +62,7 @@
         "messages": {
           "values": [
             {
-              "content": "=From the following user inputs, create 5 unique idea titles in Thai. The output should be a JSON array containing each title and a brief explanation.\n\nInput Variables:\n\nscope: {{ $json.body.scope }} (The main topic or area for the ideas.)\n\npurpose: {{ $json.body.purpose }} (The intended use of the ideas, e.g., personal, business, educational.)\n\naddition: {{ $json.body.addition }} (Any extra details or constraints to consider for the ideas.)\n\nOutput Structure:\n\nGenerate a JSON array of 5 objects. Each object should have three keys:\n\ntitle: (The idea title in Thai.)\n\nexplanation: (A short explanation of the idea in Thai, no more than one sentence.)\n\ndevelopment time : (time that use to development the ideas)"
+              "content": "=From the following user inputs, create 5 unique idea titles in Thai. The output should be a JSON array containing each title and a brief explanation.\n\nInput Variables:\n\nscope: {{ $json.body.scope }} (The main topic or area for the ideas.)\n\npurpose: {{ $json.body.purpose }} (The intended use of the ideas, e.g., personal, business, educational.)\n\naddition: {{ $json.body.addition }} (Any extra details or constraints to consider for the ideas.)\n\nOutput Structure:\n\nGenerate a JSON array of 5 objects. Each object should have three keys:\n\ntitle: (The idea title in Thai.{keep main ideas from scope})\n\nexplanation: (A short explanation of the idea in Thai, no more than one sentence.)\n\n\"development time\" : (time that use to development the ideas)"
             }
           ]
         },
@@ -274,7 +274,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "dddbfd93-1cf8-4c3d-93c6-60adfaef92fb",
+  "versionId": "63e7dc2d-b4e3-458f-a25b-a9057e392778",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "33d3118021c86740b1a15c617d0d9d55d063df19d7374e00a1b8953c3734f20d"
