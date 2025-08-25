@@ -1,6 +1,6 @@
 //API SetUp
-const url = `https://florist-remix-underground-newton.trycloudflare.com/webhook/webhook/idea-request`; // Replace with your actual webhook
-const url2 = `https://florist-remix-underground-newton.trycloudflare.com/webhook/webhook/image-request`; // Replace with your actual webhook for image generation
+const url = `'your_wedhook_host'/webhook/webhook/idea-request`; // Replace with your actual webhook
+const url2 = `'your_wedhook_host'/webhook/webhook/image-request`; // Replace with your actual webhook for image generation
 // Global variables
 let currentIdeas = [];
 let selectedIdeaIndex = null;
