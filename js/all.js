@@ -1,6 +1,6 @@
 //API SetUp
-const url = `https://phomo-n8n-docker.onrender.com/webhook/webhook/idea-request`; // Replace with your actual webhook
-
+const url = `https://florist-remix-underground-newton.trycloudflare.com/webhook/webhook/idea-request`; // Replace with your actual webhook
+const url2 = `https://florist-remix-underground-newton.trycloudflare.com/webhook/webhook/image-request`; // Replace with your actual webhook for image generation
 // Global variables
 let currentIdeas = [];
 let selectedIdeaIndex = null;
@@ -452,8 +452,43 @@ function renderIdeaDetails(data) {
         document.getElementById('testingDesc').textContent = data.ideas.development_method.testing_validation || 'Testing and validation phase description...';
         document.getElementById('launchDesc').textContent = data.ideas.development_method.launch_scale || 'Launch and scale phase description...';
     }
+    fetchImage(); // Fetch image after rendering details
+    async function fetchImage() {
+      try {
+        const Data = {
+            prompt: data.ideas.idea || 'Default idea title',
+            description: data.ideas.explanation || 'Default idea explanation',
+        };
+        // Call your n8n webhook (change URL to match your setup)
+        const response = await fetch(url2, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(Data)
+        });
+        
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
 
-    
+        // Get PNG as blob
+        const blob = await response.blob();
+
+        // Create URL for image
+        const imageUrl = URL.createObjectURL(blob);
+
+        // Show the image
+        const imgEl = document.getElementById("generatedImage");
+        imgEl.src = imageUrl;
+
+        // Generate a simple "title" (you can also fetch it from your API if it returns metadata)
+        const titleEl = document.getElementById("title");
+
+      } catch (err) {
+        console.error("Failed to load image:", err);
+      }
+    }
 }
 
 // Generate new ideas (demo function)
